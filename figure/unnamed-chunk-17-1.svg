@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="144pt" height="144pt" viewBox="0 0 144 144" version="1.1">
+<defs>
+<clipPath id="clip1">
+  <rect width="144" height="144"/>
+</clipPath>
+<g id="surface252" clip-path="url(#clip1)">
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(74.509804%,74.509804%,74.509804%);fill-opacity:1;" d="M 126 72 C 126 42.175781 101.824219 18 72 18 C 42.175781 18 18 42.175781 18 72 C 18 101.824219 42.175781 126 72 126 C 101.824219 126 126 101.824219 126 72 "/>
+</g>
+<pattern id="pattern0" patternUnits="userSpaceOnUse" width="144" height="144" patternTransform="matrix(0.15748,0,0,-0.15748,60.661417,83.338583)">
+<use xlink:href="#surface252"/>
+</pattern>
+</defs>
+<g id="surface247">
+<path style="fill-rule:nonzero;fill:url(#pattern0);stroke-width:0.75;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 36 144 L 108 144 L 108 0 L 36 0 Z M 36 144 "/>
+</g>
+</svg>
