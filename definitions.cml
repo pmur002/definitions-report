@@ -45,7 +45,10 @@
     <a href="http://orcid.org"><img alt="" src="https://www.stat.auckland.ac.nz/~paul/ORCID/ORCiD.png" style="width: 16px; height: 16px; vertical-align: middle" /></a> <span style="font-family: mono; font-size: small"><a href="http://orcid.org/0000-0002-3224-8858">http://orcid.org/0000-0002-3224-8858</a></span>
   </p>
   <p class="date">
-    Version 1:  original publication
+    Version 1:  
+    <rcode echo="FALSE" results="asis">
+cat(format(Sys.Date(), "%A %d %B %Y"))
+    </rcode>
   </p>
 
   <rcode id="init" echo="FALSE" message="FALSE" results="hide">
@@ -107,14 +110,15 @@ options(bitmapType="cairo")
   </p>
 
   <p>
-    <str>NOTE</str> that these new graphics features have (so far) only been
-    implemented for some of the graphics devices provided by the
-    'grDevices' package (so far):  Cairo graphics devices, 
+    <str>NOTE</str> that these new graphics features have not (yet) been
+    implemented for all of the graphics devices provided by the
+    'grDevices' package.  Devices that do support
+    the new features are the
+    <code>pdf()</code> graphics device and Cairo graphics devices:
     <code>x11(type="cairo")</code>, <code>cairo_pdf()</code>,
     <code>cairo_ps()</code>, <code>png(type="cairo")</code>,
     <code>jpeg(type="cairo")</code>, <code>tiff(type="cairo")</code>, 
-    and <code>svg()</code>) and the
-    <code>pdf()</code> graphics device.
+    and <code>svg()</code>.
     The remainder of the 
     graphics devices in 'grDevices' will run, but will (silently) not 
     produce the correct output.
@@ -151,7 +155,8 @@ options(bitmapType="cairo")
   <p>
     The 'riverplot' package (<a href="#pkg:riverplot"/>)
     can produce images like the one below,
-    which appears to contain colour gradient fills, but only through
+    which appears to contain colour gradient fills, but it can only
+    do so by
     drawing lots of filled polygons (of slightly different shades).
   </p>
   <rcode echo="FALSE" results="hide">
@@ -185,7 +190,7 @@ ggplot(mpg, aes(class)) +
   </rcode>
   <p>
     The new features in the graphics engine for R 4.1.0, 
-    including clipping paths,
+    including clipping paths, gradient fills, and pattern fills,
     expand the range of graphical images that can be produced
     (more conveniently) 
     with R.
@@ -1223,8 +1228,8 @@ popViewport()
   <p>
     Another piece of evidence of pent up demand is the existence
     of packages like 'riverplot' 
-    and 'ggpattern' that were mentined in the
-    <a href="#introduction"/>.  Both of these should benefit from native
+    and 'ggpattern' that were mentioned in the
+    <a href="#intro"/>.  Both of these should benefit from native
     support for these features in the R graphics engine
     (while still providing benefit on graphics devices that cannot
     support these features themselves!).  The 'gridSVG'
@@ -1265,7 +1270,7 @@ popViewport()
     On the plus side, the current API passes an SEXP as the specification for 
     a pattern or clipping
     path or mask to resolve, so it should be possible in future to
-    pass other obects via this interface with, say, classes used to
+    pass other objects via this interface with, say, classes used to
     distinguish between different sorts of specifications.
   </p>
 
@@ -1316,8 +1321,9 @@ popViewport()
     gradient fill within text.
   </li>
   <li>
-    The PDF device does not (yet) allow rasters within patterns or masks.
-    Clipping paths, masks, and patterns are not compressed (yet).
+    The PDF device does not (yet) allow rasters within patterns or masks and
+    the "streams" within 
+    clipping paths, masks, and patterns are not compressed (yet).
   </li>
   <li>
     The Cairo device currently has a fixed 
@@ -1624,11 +1630,11 @@ popViewport()
   <h2>How to cite this report</h2>
   <p>
     Murrell, P. (2020). "Catching Up with R Graphics" 
-    Technical Report 2020-??, Department of Statistics, The University of Auckland. 
+    Technical Report 2020-04, Department of Statistics, The University of Auckland. 
     Version 1.
     [ <a href="how-to-cite.bib">bib</a> |
-      <a href="">DOI</a> | 
-      <a href="http://stattech.blogs.auckland.ac.nz/2020/">http</a> ]
+      <a href="http://dx.doi.org/10.17608/k6.auckland.12649751">DOI</a> | 
+      <a href="https://stattech.blogs.auckland.ac.nz/2020/07/14/2020-04-catching-up-with-r-graphics/">http</a> ]
   </p>
 
   <h2><a name="references">References</a></h2>

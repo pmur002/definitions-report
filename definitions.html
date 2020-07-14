@@ -111,7 +111,8 @@
       </span>
     </p>
     <p class="date">
-    Version 1:  original publication
+    Version 1:  
+Tuesday 14 July 2020
   </p>
 
 
@@ -152,14 +153,15 @@
     that have been made.  This may be relevant for coders who make
     changes to the R graphics engine in the future.
   </p>
-    <p><strong>NOTE</strong> that these new graphics features have (so far) only been
-    implemented for some of the graphics devices provided by the
-    'grDevices' package (so far):  Cairo graphics devices, 
+    <p><strong>NOTE</strong> that these new graphics features have not (yet) been
+    implemented for all of the graphics devices provided by the
+    'grDevices' package.  Devices that do support
+    the new features are the
+    <code>pdf()</code> graphics device and Cairo graphics devices:
     <code>x11(type="cairo")</code>, <code>cairo_pdf()</code>,
     <code>cairo_ps()</code>, <code>png(type="cairo")</code>,
     <code>jpeg(type="cairo")</code>, <code>tiff(type="cairo")</code>, 
-    and <code>svg()</code>) and the
-    <code>pdf()</code> graphics device.
+    and <code>svg()</code>.
     The remainder of the 
     graphics devices in 'grDevices' will run, but will (silently) not 
     produce the correct output.
@@ -223,19 +225,20 @@
     <p>
     The 'riverplot' package (<a href="#pkg:riverplot">Weiner, 2017</a>)
     can produce images like the one below,
-    which appears to contain colour gradient fills, but only through
+    which appears to contain colour gradient fills, but it can only
+    do so by
     drawing lots of filled polygons (of slightly different shades).
   </p>
-<div class="chunk" id="unnamed-chunk-2"><div class="rimage default"><img src="figure/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div></div>
+<div class="chunk" id="unnamed-chunk-3"><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
     <p>
     Similarly, the 'ggpattern' package package (<a href="#pkg:ggpattern">FC, 2020</a>)
     can produce pattern fills like the ones shown below,
     but only through a lot of hard work.
   </p>
-<div class="chunk" id="unnamed-chunk-3"><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
+<div class="chunk" id="unnamed-chunk-4"><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
     <p>
     The new features in the graphics engine for R 4.1.0, 
-    including clipping paths,
+    including clipping paths, gradient fills, and pattern fills,
     expand the range of graphical images that can be produced
     (more conveniently) 
     with R.
@@ -267,10 +270,10 @@
     The <code>linearGradient</code> function is used to
     define the properties of the linear gradient.
   </p>
-<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(grid)</span>
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(grid)</span>
 <span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">linearGradient</span><span class="hl std">()))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
     <p>
     A linear gradient is defined by a start point (default: bottom-left)
     and an end point (default: top-right) and a series of "stops"
@@ -288,13 +291,13 @@
   </p>
     <!-- produce PNG for this one because SVG does NOT have 
        spreadMethod="none" (so Cairo SVG just uses "pad") -->
-<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">linearGradient</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;red&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;yellow&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">),</span>
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">linearGradient</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;red&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;yellow&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">),</span>
                                       <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span> <span class="hl num">.5</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">),</span>
                                       <span class="hl kwc">x1</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">,</span> <span class="hl kwc">y1</span><span class="hl std">=</span><span class="hl kwd">unit</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl str">&quot;in&quot;</span><span class="hl std">),</span>
                                       <span class="hl kwc">x2</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">,</span> <span class="hl kwc">y2</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl std">,</span>
                                       <span class="hl kwc">extend</span><span class="hl std">=</span><span class="hl str">&quot;none&quot;</span><span class="hl std">)))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div></div>
     <p>
     When the gradient fill is specified on an individual grob, 
     the start and end points are relative to the grob bounding box.
@@ -303,10 +306,10 @@
     starts at the bottom-left of the rectangle and ends at the top-right
     of the rectangle.
   </p>
-<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">width</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">,</span> <span class="hl kwc">height</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">,</span>
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">width</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">,</span> <span class="hl kwc">height</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">,</span>
           <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">linearGradient</span><span class="hl std">()))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
     <p>
     A gradient fill can also be specified on a viewport, in which case
     the gradient is relative to the viewport and all subsequent
@@ -330,10 +333,10 @@
     shows that the gradient that the rectangle inherits is relative
     to the viewport rather than being relative to the rectangle.
   </p>
-<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">pushViewport</span><span class="hl std">(</span><span class="hl kwd">viewport</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">linearGradient</span><span class="hl std">())))</span>
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">pushViewport</span><span class="hl std">(</span><span class="hl kwd">viewport</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">linearGradient</span><span class="hl std">())))</span>
 <span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">width</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">,</span> <span class="hl kwc">height</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
     <p>
     The next example shows another variation on inheritance of gpar 
     settings.  This time a viewport is pushed with the default
@@ -347,14 +350,14 @@
     a rectangle in the right third of the image it again inherits
     the linear gradient (relative to the viewport).  
   </p>
-<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">pushViewport</span><span class="hl std">(</span><span class="hl kwd">viewport</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">linearGradient</span><span class="hl std">())))</span>
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">pushViewport</span><span class="hl std">(</span><span class="hl kwd">viewport</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">linearGradient</span><span class="hl std">())))</span>
 <span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">=</span><span class="hl num">.2</span><span class="hl std">,</span> <span class="hl kwc">width</span><span class="hl std">=</span><span class="hl num">.2</span><span class="hl std">,</span> <span class="hl kwc">height</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">)</span>
 <span class="hl kwd">pushViewport</span><span class="hl std">(</span><span class="hl kwd">viewport</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl str">&quot;green&quot;</span><span class="hl std">)))</span>
 <span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">,</span> <span class="hl kwc">width</span><span class="hl std">=</span><span class="hl num">.2</span><span class="hl std">,</span> <span class="hl kwc">height</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">)</span>
 <span class="hl kwd">popViewport</span><span class="hl std">()</span>
 <span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">=</span><span class="hl num">.8</span><span class="hl std">,</span> <span class="hl kwc">width</span><span class="hl std">=</span><span class="hl num">.2</span><span class="hl std">,</span> <span class="hl kwc">height</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" class="plot" /></div></div>
     <!--
   <p>
     The next example also demonstrates inheritance of gpar settings,
@@ -378,19 +381,19 @@ grid.rect()
     top draw a rect with a gradient fill that transitions from
     (opaque) white to transparent.
   </p>
-<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">grid.text</span><span class="hl std">(</span><span class="hl str">&quot;Reveal&quot;</span><span class="hl std">,</span> <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fontface</span><span class="hl std">=</span><span class="hl str">&quot;bold&quot;</span><span class="hl std">,</span> <span class="hl kwc">cex</span><span class="hl std">=</span><span class="hl num">3</span><span class="hl std">))</span>
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">grid.text</span><span class="hl std">(</span><span class="hl str">&quot;Reveal&quot;</span><span class="hl std">,</span> <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fontface</span><span class="hl std">=</span><span class="hl str">&quot;bold&quot;</span><span class="hl std">,</span> <span class="hl kwc">cex</span><span class="hl std">=</span><span class="hl num">3</span><span class="hl std">))</span>
 <span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">linearGradient</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;white&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;transparent&quot;</span><span class="hl std">),</span>
                                       <span class="hl kwc">x1</span><span class="hl std">=</span><span class="hl num">.2</span><span class="hl std">,</span> <span class="hl kwc">x2</span><span class="hl std">=</span><span class="hl num">.8</span><span class="hl std">,</span> <span class="hl kwc">y1</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">,</span> <span class="hl kwc">y2</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">)))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
     <p>
     The next example shows that radial gradients work via
     the same interface.   We specify the properties of a radial
     gradient with the <code>radialGradient</code> function.
   </p>
-<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">radialGradient</span><span class="hl std">()))</span>
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">radialGradient</span><span class="hl std">()))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
     <p>
     As with linear gradients, we have control over the start and end
     of the radial gradient, though in the radial case it is a start circle
@@ -400,17 +403,17 @@ grid.rect()
     that is centred on the image and has diameter the size of the image
     (and is black).
   </p>
-<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">radialGradient</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;white&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">),</span>
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">radialGradient</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;white&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">),</span>
                                       <span class="hl kwc">cx1</span><span class="hl std">=</span><span class="hl num">.8</span><span class="hl std">,</span> <span class="hl kwc">cy1</span><span class="hl std">=</span><span class="hl num">.8</span><span class="hl std">)))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
     <p>
     The next example shows that we can add a gradient to an
     existing image, in this case a 'ggplot2' plot.
     Here we edit the background of the plot panel to add
     a grey-to-white gradient.
   </p>
-<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>
+<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>
 <span class="hl kwd">ggplot</span><span class="hl std">(mtcars)</span> <span class="hl opt">+</span>
     <span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">=disp,</span> <span class="hl kwc">y</span><span class="hl std">=mpg))</span> <span class="hl opt">+</span>
     <span class="hl kwd">theme_bw</span><span class="hl std">()</span>
@@ -418,14 +421,14 @@ grid.rect()
 <span class="hl kwd">grid.edit</span><span class="hl std">(</span><span class="hl str">&quot;panel.background&quot;</span><span class="hl std">,</span> <span class="hl kwc">grep</span><span class="hl std">=</span><span class="hl num">TRUE</span><span class="hl std">,</span>
           <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">linearGradient</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;grey&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;white&quot;</span><span class="hl std">),</span> <span class="hl kwc">x1</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">,</span> <span class="hl kwc">x2</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">)))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
     <p>
     The next example is similar, but demonstrates that, even with
     gradients only implemented in 'grid', we can still add gradients
     to 'graphics' plots if we first convert them using the 
     'gridGraphics' package.
   </p>
-<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(mpg</span> <span class="hl opt">~</span> <span class="hl std">disp, mtcars,</span> <span class="hl kwc">pch</span><span class="hl std">=</span><span class="hl num">16</span><span class="hl std">)</span>
+<div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(mpg</span> <span class="hl opt">~</span> <span class="hl std">disp, mtcars,</span> <span class="hl kwc">pch</span><span class="hl std">=</span><span class="hl num">16</span><span class="hl std">)</span>
 <span class="hl kwd">library</span><span class="hl std">(gridGraphics)</span>
 <span class="hl kwd">grid.echo</span><span class="hl std">()</span>
 <span class="hl std">g</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">grid.grab</span><span class="hl std">()</span>
@@ -436,7 +439,7 @@ grid.rect()
 <span class="hl kwd">grid.newpage</span><span class="hl std">()</span>
 <span class="hl kwd">grid.draw</span><span class="hl std">(g)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" class="plot" /></div></div>
     <h3>Patterns</h3>
     <p>
     The <code>fill</code> graphical parameter can now also be a general pattern.
@@ -447,11 +450,11 @@ grid.rect()
     In the code below, the pattern is three coloured circles
     and this is used to fill a rectangle.
   </p>
-<div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">pat</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">pattern</span><span class="hl std">(</span><span class="hl kwd">circleGrob</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl opt">/</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">r</span><span class="hl std">=</span><span class="hl kwd">unit</span><span class="hl std">(</span><span class="hl num">5</span><span class="hl std">,</span> <span class="hl str">&quot;mm&quot;</span><span class="hl std">),</span>
+<div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">pat</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">pattern</span><span class="hl std">(</span><span class="hl kwd">circleGrob</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl opt">/</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">r</span><span class="hl std">=</span><span class="hl kwd">unit</span><span class="hl std">(</span><span class="hl num">5</span><span class="hl std">,</span> <span class="hl str">&quot;mm&quot;</span><span class="hl std">),</span>
                           <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;red&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;green&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;blue&quot;</span><span class="hl std">))))</span>
 <span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=pat))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" class="plot" /></div></div>
     <p>
     Patterns on grobs are relative to the grob; the example
     below is the same as the example above except that the rectangle
@@ -459,11 +462,11 @@ grid.rect()
     stay the same size, but their locations are relative to the 
     rectangle that they are filling so they now overlap.
   </p>
-<div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">pat</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">pattern</span><span class="hl std">(</span><span class="hl kwd">circleGrob</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl opt">/</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">r</span><span class="hl std">=</span><span class="hl kwd">unit</span><span class="hl std">(</span><span class="hl num">5</span><span class="hl std">,</span> <span class="hl str">&quot;mm&quot;</span><span class="hl std">),</span>
+<div class="chunk" id="unnamed-chunk-16"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">pat</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">pattern</span><span class="hl std">(</span><span class="hl kwd">circleGrob</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl opt">/</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">r</span><span class="hl std">=</span><span class="hl kwd">unit</span><span class="hl std">(</span><span class="hl num">5</span><span class="hl std">,</span> <span class="hl str">&quot;mm&quot;</span><span class="hl std">),</span>
                           <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;red&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;green&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;blue&quot;</span><span class="hl std">))))</span>
 <span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">width</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">,</span> <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=pat))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" class="plot" /></div></div>
     <p>
     The next example shows that
     patterns on viewports are relative to the viewport.
@@ -473,12 +476,12 @@ grid.rect()
     the pattern fill, but the fill is relative to the viewport
     so the pattern extends beyond the limits of the rectangle.
   </p>
-<div class="chunk" id="unnamed-chunk-16"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">pat</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">pattern</span><span class="hl std">(</span><span class="hl kwd">circleGrob</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl opt">/</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">r</span><span class="hl std">=</span><span class="hl kwd">unit</span><span class="hl std">(</span><span class="hl num">5</span><span class="hl std">,</span> <span class="hl str">&quot;mm&quot;</span><span class="hl std">),</span>
+<div class="chunk" id="unnamed-chunk-17"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">pat</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">pattern</span><span class="hl std">(</span><span class="hl kwd">circleGrob</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl opt">/</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">r</span><span class="hl std">=</span><span class="hl kwd">unit</span><span class="hl std">(</span><span class="hl num">5</span><span class="hl std">,</span> <span class="hl str">&quot;mm&quot;</span><span class="hl std">),</span>
                           <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;red&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;green&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;blue&quot;</span><span class="hl std">))))</span>
 <span class="hl kwd">pushViewport</span><span class="hl std">(</span><span class="hl kwd">viewport</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=pat)))</span>
 <span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">width</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-17-1.png" title="plot of chunk unnamed-chunk-17" alt="plot of chunk unnamed-chunk-17" class="plot" /></div></div>
     <p>
     A pattern can be any 'grid' grob, which means the pattern could
     be a gTree or, as below, it could have its own viewport.
@@ -486,11 +489,11 @@ grid.rect()
     consists of three circle drawn within a viewport
     that defines a linear gradient fill.
   </p>
-<div class="chunk" id="unnamed-chunk-17"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">pat</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">circleGrob</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl opt">/</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">r</span><span class="hl std">=</span><span class="hl kwd">unit</span><span class="hl std">(</span><span class="hl num">5</span><span class="hl std">,</span> <span class="hl str">&quot;mm&quot;</span><span class="hl std">),</span>
+<div class="chunk" id="unnamed-chunk-18"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">pat</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">circleGrob</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl opt">/</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">r</span><span class="hl std">=</span><span class="hl kwd">unit</span><span class="hl std">(</span><span class="hl num">5</span><span class="hl std">,</span> <span class="hl str">&quot;mm&quot;</span><span class="hl std">),</span>
                   <span class="hl kwc">vp</span><span class="hl std">=</span><span class="hl kwd">viewport</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">linearGradient</span><span class="hl std">(</span><span class="hl kwc">y1</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">,</span> <span class="hl kwc">y2</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">))))</span>
 <span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">pattern</span><span class="hl std">(pat)))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-17-1.png" title="plot of chunk unnamed-chunk-17" alt="plot of chunk unnamed-chunk-17" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-18-1.png" title="plot of chunk unnamed-chunk-18" alt="plot of chunk unnamed-chunk-18" class="plot" /></div></div>
     <p>
     Patterns can "extend" like gradient fills;  probably the most
     typical use of a pattern will draw a simple shape and then
@@ -503,7 +506,7 @@ grid.rect()
     the pattern size is just a little bit larger than the circle
     and specifying that the pattern repeats.
   </p>
-<div class="chunk" id="unnamed-chunk-18"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">pat</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">pattern</span><span class="hl std">(</span><span class="hl kwd">circleGrob</span><span class="hl std">(</span><span class="hl kwc">r</span><span class="hl std">=</span><span class="hl kwd">unit</span><span class="hl std">(</span><span class="hl num">3</span><span class="hl std">,</span> <span class="hl str">&quot;mm&quot;</span><span class="hl std">),</span>
+<div class="chunk" id="unnamed-chunk-19"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">pat</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">pattern</span><span class="hl std">(</span><span class="hl kwd">circleGrob</span><span class="hl std">(</span><span class="hl kwc">r</span><span class="hl std">=</span><span class="hl kwd">unit</span><span class="hl std">(</span><span class="hl num">3</span><span class="hl std">,</span> <span class="hl str">&quot;mm&quot;</span><span class="hl std">),</span>
                           <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">col</span><span class="hl std">=</span><span class="hl num">NA</span><span class="hl std">,</span> <span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl str">&quot;grey&quot;</span><span class="hl std">)),</span>
                <span class="hl kwc">width</span><span class="hl std">=</span><span class="hl kwd">unit</span><span class="hl std">(</span><span class="hl num">8</span><span class="hl std">,</span> <span class="hl str">&quot;mm&quot;</span><span class="hl std">),</span>
                <span class="hl kwc">height</span><span class="hl std">=</span><span class="hl kwd">unit</span><span class="hl std">(</span><span class="hl num">8</span><span class="hl std">,</span> <span class="hl str">&quot;mm&quot;</span><span class="hl std">),</span>
@@ -511,7 +514,7 @@ grid.rect()
 <span class="hl kwd">pushViewport</span><span class="hl std">(</span><span class="hl kwd">viewport</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=pat)))</span>
 <span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">width</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-18-1.png" title="plot of chunk unnamed-chunk-18" alt="plot of chunk unnamed-chunk-18" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-19-1.png" title="plot of chunk unnamed-chunk-19" alt="plot of chunk unnamed-chunk-19" class="plot" /></div></div>
     <h3>Clipping paths</h3>
     <p>
     The <code>clip</code> argument for the <code>viewport</code> function
@@ -525,25 +528,25 @@ grid.rect()
     The text and the circle are both drawn in grey and then the text
     is drawn black with the circle used as a clipping path.
   </p>
-<div class="chunk" id="unnamed-chunk-19"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">grid.text</span><span class="hl std">(</span><span class="hl str">&quot;testing&quot;</span><span class="hl std">,</span> <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">cex</span><span class="hl std">=</span><span class="hl num">3</span><span class="hl std">,</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;grey&quot;</span><span class="hl std">))</span>
+<div class="chunk" id="unnamed-chunk-20"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">grid.text</span><span class="hl std">(</span><span class="hl str">&quot;testing&quot;</span><span class="hl std">,</span> <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">cex</span><span class="hl std">=</span><span class="hl num">3</span><span class="hl std">,</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;grey&quot;</span><span class="hl std">))</span>
 <span class="hl std">cg</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">circleGrob</span><span class="hl std">(</span><span class="hl kwc">r</span><span class="hl std">=</span><span class="hl num">.25</span><span class="hl std">,</span> <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;grey&quot;</span><span class="hl std">))</span>
 <span class="hl kwd">grid.draw</span><span class="hl std">(cg)</span>
 <span class="hl kwd">pushViewport</span><span class="hl std">(</span><span class="hl kwd">viewport</span><span class="hl std">(</span><span class="hl kwc">clip</span><span class="hl std">=cg))</span>
 <span class="hl kwd">grid.text</span><span class="hl std">(</span><span class="hl str">&quot;testing&quot;</span><span class="hl std">,</span> <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">cex</span><span class="hl std">=</span><span class="hl num">3</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-19-1.png" title="plot of chunk unnamed-chunk-19" alt="plot of chunk unnamed-chunk-19" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-20-1.png" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" class="plot" /></div></div>
     <p>
     A slightly more dramatic example involves clipping text to several
     circles at once.  Note that this still only requires a single
     grob to specify the clipping path.
   </p>
-<div class="chunk" id="unnamed-chunk-20"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">grid.text</span><span class="hl std">(</span><span class="hl str">&quot;testing&quot;</span><span class="hl std">,</span> <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">cex</span><span class="hl std">=</span><span class="hl num">3</span><span class="hl std">,</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;grey&quot;</span><span class="hl std">))</span>
+<div class="chunk" id="unnamed-chunk-21"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">grid.text</span><span class="hl std">(</span><span class="hl str">&quot;testing&quot;</span><span class="hl std">,</span> <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">cex</span><span class="hl std">=</span><span class="hl num">3</span><span class="hl std">,</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;grey&quot;</span><span class="hl std">))</span>
 <span class="hl std">cg</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">circleGrob</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl opt">/</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">r</span><span class="hl std">=</span><span class="hl num">.1</span><span class="hl std">,</span> <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;grey&quot;</span><span class="hl std">))</span>
 <span class="hl kwd">grid.draw</span><span class="hl std">(cg)</span>
 <span class="hl kwd">pushViewport</span><span class="hl std">(</span><span class="hl kwd">viewport</span><span class="hl std">(</span><span class="hl kwc">clip</span><span class="hl std">=cg))</span>
 <span class="hl kwd">grid.text</span><span class="hl std">(</span><span class="hl str">&quot;testing&quot;</span><span class="hl std">,</span> <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">cex</span><span class="hl std">=</span><span class="hl num">3</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-20-1.png" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-21-1.png" title="plot of chunk unnamed-chunk-21" alt="plot of chunk unnamed-chunk-21" class="plot" /></div></div>
     <p>
     The clipping path is relative to the viewport and
     clipping paths are inherited like the existing <code>clip</code>
@@ -561,7 +564,7 @@ grid.rect()
     we popped the viewport with a clipping path), so when we
     draw the text "test three" the text is not clipped at all.
   </p>
-<div class="chunk" id="unnamed-chunk-21"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">cg</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">circleGrob</span><span class="hl std">(</span><span class="hl kwc">y</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl opt">/</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">r</span><span class="hl std">=</span><span class="hl num">.1</span><span class="hl std">,</span> <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;grey&quot;</span><span class="hl std">))</span>
+<div class="chunk" id="unnamed-chunk-22"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">cg</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">circleGrob</span><span class="hl std">(</span><span class="hl kwc">y</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl opt">/</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">r</span><span class="hl std">=</span><span class="hl num">.1</span><span class="hl std">,</span> <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;grey&quot;</span><span class="hl std">))</span>
 <span class="hl kwd">grid.text</span><span class="hl std">(</span><span class="hl str">&quot;test one&quot;</span><span class="hl std">,</span> <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">cex</span><span class="hl std">=</span><span class="hl num">3</span><span class="hl std">,</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;grey&quot;</span><span class="hl std">))</span>
 <span class="hl kwd">grid.draw</span><span class="hl std">(cg)</span>
 <span class="hl kwd">pushViewport</span><span class="hl std">(</span><span class="hl kwd">viewport</span><span class="hl std">(</span><span class="hl kwc">y</span><span class="hl std">=</span><span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">height</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl opt">/</span><span class="hl num">3</span><span class="hl std">,</span> <span class="hl kwc">just</span><span class="hl std">=</span><span class="hl str">&quot;bottom&quot;</span><span class="hl std">))</span>
@@ -575,7 +578,7 @@ grid.rect()
 <span class="hl kwd">pushViewport</span><span class="hl std">(</span><span class="hl kwd">viewport</span><span class="hl std">(</span><span class="hl kwc">y</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwc">height</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl opt">/</span><span class="hl num">3</span><span class="hl std">,</span> <span class="hl kwc">just</span><span class="hl std">=</span><span class="hl str">&quot;top&quot;</span><span class="hl std">))</span>
 <span class="hl kwd">grid.text</span><span class="hl std">(</span><span class="hl str">&quot;test three&quot;</span><span class="hl std">,</span> <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">cex</span><span class="hl std">=</span><span class="hl num">3</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-21-1.png" title="plot of chunk unnamed-chunk-21" alt="plot of chunk unnamed-chunk-21" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-22-1.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" class="plot" /></div></div>
     <!--
   <p>
     Clipping paths are just paths (outlines of shapes); they do not
@@ -628,12 +631,12 @@ grid.text("testing", gp=gpar(cex=3))
     the mask is non-transparent are drawn;  the rectangle is filtered
     by the mask.
   </p>
-<div class="chunk" id="unnamed-chunk-22"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">mask</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">circleGrob</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">col</span><span class="hl std">=</span><span class="hl num">NA</span><span class="hl std">,</span>
+<div class="chunk" id="unnamed-chunk-23"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">mask</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">circleGrob</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">col</span><span class="hl std">=</span><span class="hl num">NA</span><span class="hl std">,</span>
                            <span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">radialGradient</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;transparent&quot;</span><span class="hl std">))))</span>
 <span class="hl kwd">pushViewport</span><span class="hl std">(</span><span class="hl kwd">viewport</span><span class="hl std">(</span><span class="hl kwc">mask</span><span class="hl std">=mask))</span>
 <span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">width</span><span class="hl std">=</span><span class="hl num">.5</span><span class="hl std">,</span> <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl str">&quot;black&quot;</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-22-1.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-23-1.png" title="plot of chunk unnamed-chunk-23" alt="plot of chunk unnamed-chunk-23" class="plot" /></div></div>
     <p>
     The following code blends two 'ggplot2' plots using a mask.
     This time the mask is a linear gradient from black 30%
@@ -643,7 +646,7 @@ grid.text("testing", gp=gpar(cex=3))
     plot on top, using the mask, so from 30% up the page the 
     black-and-white plot transitions smoothly into the default themed plot.
   </p>
-<div class="chunk" id="unnamed-chunk-23"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">gg1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">ggplot</span><span class="hl std">(mtcars)</span> <span class="hl opt">+</span>
+<div class="chunk" id="unnamed-chunk-24"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">gg1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">ggplot</span><span class="hl std">(mtcars)</span> <span class="hl opt">+</span>
     <span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">=disp,</span> <span class="hl kwc">y</span><span class="hl std">=mpg))</span>
 <span class="hl std">gg2</span> <span class="hl kwb">&lt;-</span> <span class="hl std">gg1</span> <span class="hl opt">+</span>
     <span class="hl kwd">theme_bw</span><span class="hl std">()</span>
@@ -653,7 +656,7 @@ grid.text("testing", gp=gpar(cex=3))
 <span class="hl kwd">pushViewport</span><span class="hl std">(</span><span class="hl kwd">viewport</span><span class="hl std">(</span><span class="hl kwc">mask</span><span class="hl std">=mask))</span>
 <span class="hl kwd">print</span><span class="hl std">(gg2,</span> <span class="hl kwc">newpage</span><span class="hl std">=</span><span class="hl num">FALSE</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-23-1.png" title="plot of chunk unnamed-chunk-23" alt="plot of chunk unnamed-chunk-23" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-24-1.png" title="plot of chunk unnamed-chunk-24" alt="plot of chunk unnamed-chunk-24" class="plot" /></div></div>
     <p>
     Here is an example of a relatively complex mask that cannot be 
     achieved with clipping paths (because
@@ -666,7 +669,7 @@ grid.text("testing", gp=gpar(cex=3))
     The same effect could be achieved by replacing the clipping path
     with a mask (nested masks are ok).
   </p>
-<div class="chunk" id="unnamed-chunk-24"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">mask</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">gTree</span><span class="hl std">(</span><span class="hl kwc">children</span><span class="hl std">=</span><span class="hl kwd">gList</span><span class="hl std">(</span><span class="hl kwd">rectGrob</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">=</span><span class="hl num">.25</span><span class="hl std">,</span> <span class="hl kwc">width</span><span class="hl std">=</span><span class="hl num">.3</span><span class="hl std">,</span> <span class="hl kwc">height</span><span class="hl std">=</span><span class="hl num">.8</span><span class="hl std">,</span>
+<div class="chunk" id="unnamed-chunk-25"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">mask</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">gTree</span><span class="hl std">(</span><span class="hl kwc">children</span><span class="hl std">=</span><span class="hl kwd">gList</span><span class="hl std">(</span><span class="hl kwd">rectGrob</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">=</span><span class="hl num">.25</span><span class="hl std">,</span> <span class="hl kwc">width</span><span class="hl std">=</span><span class="hl num">.3</span><span class="hl std">,</span> <span class="hl kwc">height</span><span class="hl std">=</span><span class="hl num">.8</span><span class="hl std">,</span>
                                       <span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl str">&quot;black&quot;</span><span class="hl std">),</span>
                                       <span class="hl kwc">vp</span><span class="hl std">=</span><span class="hl kwd">viewport</span><span class="hl std">(</span><span class="hl kwc">clip</span><span class="hl std">=</span><span class="hl kwd">circleGrob</span><span class="hl std">(</span><span class="hl kwc">r</span><span class="hl std">=</span><span class="hl num">.4</span><span class="hl std">))),</span>
                              <span class="hl kwd">rectGrob</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">=</span><span class="hl num">.75</span><span class="hl std">,</span> <span class="hl kwc">width</span><span class="hl std">=</span><span class="hl num">.3</span><span class="hl std">,</span> <span class="hl kwc">height</span><span class="hl std">=</span><span class="hl num">.8</span><span class="hl std">,</span>
@@ -675,7 +678,7 @@ grid.text("testing", gp=gpar(cex=3))
 <span class="hl kwd">grid.rect</span><span class="hl std">(</span><span class="hl kwc">gp</span><span class="hl std">=</span><span class="hl kwd">gpar</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl str">&quot;grey&quot;</span><span class="hl std">))</span>
 <span class="hl kwd">popViewport</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-24-1.png" title="plot of chunk unnamed-chunk-24" alt="plot of chunk unnamed-chunk-24" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-25-1.png" title="plot of chunk unnamed-chunk-25" alt="plot of chunk unnamed-chunk-25" class="plot" /></div></div>
     <h2>
       <a name="devices">3. Device API</a>
     </h2>
@@ -1262,8 +1265,8 @@ grid.text("testing", gp=gpar(cex=3))
     <p>
     Another piece of evidence of pent up demand is the existence
     of packages like 'riverplot' 
-    and 'ggpattern' that were mentined in the
-    <a href="#introduction"></a>.  Both of these should benefit from native
+    and 'ggpattern' that were mentioned in the
+    <a href="#intro">Introduction</a>.  Both of these should benefit from native
     support for these features in the R graphics engine
     (while still providing benefit on graphics devices that cannot
     support these features themselves!).  The 'gridSVG'
@@ -1303,7 +1306,7 @@ grid.text("testing", gp=gpar(cex=3))
     On the plus side, the current API passes an SEXP as the specification for 
     a pattern or clipping
     path or mask to resolve, so it should be possible in future to
-    pass other obects via this interface with, say, classes used to
+    pass other objects via this interface with, say, classes used to
     distinguish between different sorts of specifications.
   </p>
     <h3>Efficiency</h3>
@@ -1352,8 +1355,9 @@ grid.text("testing", gp=gpar(cex=3))
     gradient fill within text.
   </li>
       <li>
-    The PDF device does not (yet) allow rasters within patterns or masks.
-    Clipping paths, masks, and patterns are not compressed (yet).
+    The PDF device does not (yet) allow rasters within patterns or masks and
+    the "streams" within 
+    clipping paths, masks, and patterns are not compressed (yet).
   </li>
       <li>
     The Cairo device currently has a fixed 
@@ -1650,11 +1654,11 @@ grid.text("testing", gp=gpar(cex=3))
     <h2>How to cite this report</h2>
     <p>
     Murrell, P. (2020). "Catching Up with R Graphics" 
-    Technical Report 2020-??, Department of Statistics, The University of Auckland. 
+    Technical Report 2020-04, Department of Statistics, The University of Auckland. 
     Version 1.
     [ <a href="how-to-cite.bib">bib</a> |
-      <a href="">DOI</a> | 
-      <a href="http://stattech.blogs.auckland.ac.nz/2020/">http</a> ]
+      <a href="http://dx.doi.org/10.17608/k6.auckland.12649751">DOI</a> | 
+      <a href="https://stattech.blogs.auckland.ac.nz/2020/07/14/2020-04-catching-up-with-r-graphics/">http</a> ]
   </p>
     <h2>
       <a name="references">8. References</a>
